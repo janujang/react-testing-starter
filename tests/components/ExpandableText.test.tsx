@@ -29,7 +29,7 @@ describe("ExpandableText", () => {
     expect(button).toHaveTextContent(/more/i);
   });
 
-  it("should render expanded text when show morebutton is clicked", async () => {
+  it("should render expanded text when show more button is clicked", async () => {
     render(<ExpandableText text={longText} />);
 
     const button = screen.getByRole("button");
@@ -39,5 +39,20 @@ describe("ExpandableText", () => {
     const article = screen.getByRole("article");
     expect(article).toHaveTextContent(longText);
     expect(button).toHaveTextContent(/less/i);
+  });
+
+  it("should render truncated text when show less button is clicked", async () => {
+    render(<ExpandableText text={longText} />);
+
+    const showMoreButton = screen.getByRole("button", { name: /more/i });
+    const user = userEvent.setup();
+    await user.click(showMoreButton);
+
+    const showLessButton = screen.getByRole("button", { name: /less/i });
+    await user.click(showLessButton);
+
+    const article = screen.getByRole("article");
+    expect(article).toHaveTextContent(truncatedText);
+    expect(showMoreButton).toHaveTextContent(/more/i);
   });
 });
