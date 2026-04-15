@@ -1,7 +1,8 @@
+import ExpandableText from "../components/ExpandableText";
 import Onboarding from "../components/Onboarding";
 
 const PlaygroundPage = () => {
-  return <Onboarding />;
+  return <ExpandableText text="Hello" />;
 };
 
 export default PlaygroundPage;
